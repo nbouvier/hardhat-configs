@@ -1,0 +1,3 @@
+[submodule "hardhat-configs-base"]
+	path = hardhat-configs-base
+	url = git@github.nbouvier:nbouvier/hardhat-configs-base.git
