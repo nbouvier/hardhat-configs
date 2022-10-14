@@ -1,3 +1,0 @@
-[submodule "hardhat-configs-base"]
-	path = hardhat-configs-base
-	url = https://github.com/nbouvier/hardhat-configs-base.git
