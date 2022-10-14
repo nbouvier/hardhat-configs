@@ -23,12 +23,12 @@ export async function getContractConfigLine(name: string): Promise<ConfigLine> {
 }
 
 // Reads the <artifactName> artifact and returns the contract instance at <address>
-// @arg contract the contract to get the artifact of
-// @arg address  the contract address
-// @arg Provider the network provider
-export async function getContractFromArtifact(contract: string, address: string, provider: JsonRpcProvider): Promise<Contract> {
+// @arg contractName the contract to get the artifact of
+// @arg address      the contract address
+// @arg Provider     the network provider
+export async function getContractFromArtifact(contractName: string, address: string, provider: JsonRpcProvider): Promise<Contract> {
     // Read the ABI
-    const abi: Interface = getContractABI(contract);
+    const abi: Interface = getContractABI(contractName);
     // Get the contract
     const contract: Contract = new ethers.Contract(address, abi, provider);
 
@@ -36,17 +36,17 @@ export async function getContractFromArtifact(contract: string, address: string,
 }
 
 // Returns the contract artifact file name
-// @arg contract the contract to get the artifact name of
+// @arg contractName the contract to get the artifact name of
 // @returns string the name of the contract artifact
-function getArtifactName(contract: string): string {
-    return `${ARTIFACT_FOLDER}${contract}${ARTIFACT_FOLDER_EXT}${contract}${ARTIFACT_EXT}`;
+function getArtifactName(contractName: string): string {
+    return `${ARTIFACT_FOLDER}${contractName}${ARTIFACT_FOLDER_EXT}${contractName}${ARTIFACT_EXT}`;
 }
 
 // Returns the contract ABI
-// @arg contract the contract to get the ABI of
+// @arg contractName the contract to get the ABI of
 // @returns the ABI of the contract
-function getContractABI(contract: string): Promise<Interface> {
-    const artifactName: string = getArtifactName(contract);
+function getContractABI(contractName: string): Interface {
+    const artifactName: string = getArtifactName(contractName);
     const artifact: any = JSON.parse(fs.readFileSync(artifactName, { encoding: 'utf8', flag:'r' }));
     const abi: Interface = new ethers.utils.Interface(artifact.abi);
 
