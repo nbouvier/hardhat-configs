@@ -2,7 +2,13 @@ import type { HardhatRuntimeEnvironment } from 'hardhat/types';
 import type { Contract } from 'ethers';
 
 import { sleep } from './sleep';
-import { NetworkNotFound } from '../errors';
+
+export class NetworkNotFoundException extends Error {
+    constructor() {
+        super(`Couldn't retrieve the used network.`);
+        this.name = 'NetworkNotFound';
+    }
+}
 
 // Returns the used network as a string. Tries <maxRep> times with a delay of
 // <delay> until a network is found.
@@ -18,7 +24,7 @@ export async function getNetwork(rep: number = 5, delay: number = 1000): Promise
 
     // Throw an exception if every repetition has been done
     if (!rep) {
-        throw new NetworkNotFound();
+        throw new NetworkNotFoundException();
     }
 
     // Print the waiting message in the console

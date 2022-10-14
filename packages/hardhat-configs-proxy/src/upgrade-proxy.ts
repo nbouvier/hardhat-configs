@@ -1,8 +1,14 @@
 import type { HardhatRuntimeEnvironment } from 'hardhat/types';
 import type { ContractFactory, Contract } from 'ethers';
 
-import { getContractConfigLine, getContractFromArtifact } from '@nbouvier/hardhat-configs/utils/contract';
-import { ProxyError } from '../errors';
+import { getContractConfigLine, getContractFromArtifact } from '@nbouvier/hardhat-configs';
+
+export class ProxyUpgradeException extends Error {
+    constructor(name: string) {
+        super(`Failed to upgrade proxy ${name}.`);
+        this.name = 'ProxyUpgradeException';
+    }
+}
 
 export interface UpgradeProxyFunction {
     (name: string, artifactName: string): Promise<Contract>;
@@ -22,7 +28,7 @@ export function makeUpgradeProxy(hre: HardhatRuntimeEnvironment): UpgradeProxyFu
             const factory: ContractFactory = await hre.ethers.getContractFactory(artifactName);
             newContract = await hre.upgrades.upgradeProxy(contract.address, factory);
         } catch (e) {
-            throw new ProxyError(name, true);
+            throw new ProxyUpgradeException(name);
         }
 
         // Return the upgraded contract

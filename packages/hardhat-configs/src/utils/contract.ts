@@ -1,7 +1,7 @@
 import type { Artifact } from 'hardhat/types';
 import type { Contract } from 'ethers';
 import type { JsonRpcProvider } from '@ethersproject/providers';
-import type { Config, ConfigLine } from '../types';
+import type { Config, ConfigLine } from './config';
 
 import { artifacts } from 'hardhat';
 import { ethers } from 'ethers';

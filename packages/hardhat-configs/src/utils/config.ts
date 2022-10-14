@@ -1,9 +1,13 @@
 import type { HardhatRuntimeEnvironment } from 'hardhat/types';
-import type { Config, ConfigLine } from '../types';
 
 import fs from 'fs';
 import { getNetwork } from './network';
-import { CONFIG_FOLDER, CONFIG_EXT } from '../constants';
+
+export interface Config { [ contractName: string ]: ConfigLine };
+export interface ConfigLine { artifact: string, address: string };
+
+const CONFIG_FOLDER = './configs/';
+const CONFIG_EXT = '.config';
 
 // Returns the config file name of the used network
 // @returns {string} the config file name

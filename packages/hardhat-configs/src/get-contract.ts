@@ -1,10 +1,16 @@
 import type { HardhatRuntimeEnvironment } from 'hardhat/types';
 import type { Contract } from 'ethers';
-import type { ConfigLine } from '../types';
+import type { ConfigLine } from './utils/config';
 
-import { ConfigEntryNotFoundError } from '../errors';
-import { getConfigFile } from '../utils/config';
-import { getContractConfigLine, getContractFromArtifact } from '../utils/contract';
+import { getConfigFile } from './utils/config';
+import { getContractConfigLine, getContractFromArtifact } from './utils/contract';
+
+export class ConfigEntryNotFoundException extends Error {
+    constructor(contract: string, configFile: string) {
+        super(`Couldn't find the ${contract} entry in ${configFile}.`);
+        this.name = 'ConfigEntryNotFoundError';
+    }
+}
 
 export interface GetContractFunction {
     (name: string): Promise<Contract>;
@@ -29,7 +35,7 @@ export function makeGetContract(hre: HardhatRuntimeEnvironment): GetContractFunc
         const artifactFile: string = artifactName || configLine?.artifact || name;
         const contractAddress: string | undefined = address || configLine?.address;
         if (!contractAddress) {
-            throw new ConfigEntryNotFoundError(name, await getConfigFile());
+            throw new ConfigEntryNotFoundException(name, await getConfigFile());
         }
 
         // Load the contract
