@@ -1,3 +1,5 @@
+import '@nomiclabs/hardhat-ethers';
+
 import type { HardhatRuntimeEnvironment } from 'hardhat/types';
 import type { GetContractFunction } from './get-contract';
 import type { DeployFunction } from './deploy';
