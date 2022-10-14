@@ -1,6 +1,6 @@
 {
   "name": "@nbouvier/hardhat-configs",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Contract addresses managment for Hardhat project",
   "main": "./dist/index.js",
   "files": [
