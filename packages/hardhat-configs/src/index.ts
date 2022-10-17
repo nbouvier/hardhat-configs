@@ -7,8 +7,8 @@ import type { DeployFunction } from './deploy';
 import { subtask, extendEnvironment, extendConfig } from 'hardhat/config';
 import { lazyObject } from 'hardhat/plugins';
 
-export { DeploymentException } from './deploy';
-export { ConfigEntryNotFoundException } from './get-contract';
+export { ConfigEntryNotFoundException, makeGetContract } from './get-contract';
+export { DeploymentException, makeDeploy } from './deploy';
 export { Config, ConfigLine, getConfigFile, loadConfig, addToConfig } from './utils/config';
 export { getContractConfigLine, getContractFromArtifact } from './utils/contract';
 export { NetworkNotFoundException, getNetwork } from './utils/network';
