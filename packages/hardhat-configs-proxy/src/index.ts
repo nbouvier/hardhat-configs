@@ -18,16 +18,16 @@ export interface HardhatConfigsProxy extends HardhatConfigs {
 
 extendEnvironment((hre: HardhatRuntimeEnvironment) => {
     hre.configs = lazyObject((): HardhatConfigsProxy => {
-        const { makeGetContract } = require('@nbouvier/hardhat-configs');
-        const { makeDeploy } = require('@nbouvier/hardhat-configs');
+        const { makeGetNetwork, makeDeploy, makeGetContract } = require('@nbouvier/hardhat-configs');
         const { makeDeployProxy } = require('./deploy-proxy');
         const { makeUpgradeProxy } = require('./upgrade-proxy');
 
         return {
-            getContract: makeGetContract(hre),
+            getNetwork: makeGetNetwork(hre),
             deploy: makeDeploy(hre),
+            getContract: makeGetContract(hre),
             deployProxy: makeDeployProxy(hre),
-            upgradeProxy: makeUpgradeProxy(hre),
+            upgradeProxy: makeUpgradeProxy(hre)
         };
     });
 });

@@ -1,14 +1,9 @@
-import { HardhatUserConfig, task } from "hardhat/config";
-
-import '@nbouvier/hardhat-configs-proxy';
-
-task('test', 'Test')
-    .setAction(async (args: any, { ethers, configs }) => {
-        console.log(await configs.getContract('Chuck'));
-    });
+import { HardhatUserConfig } from "hardhat/config";
+import "@nomiclabs/hardhat-ethers";
+import "./src/index";
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.9",
+    solidity: "0.8.9",
 };
 
 export default config;

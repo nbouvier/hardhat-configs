@@ -1,6 +1,6 @@
 {
   "name": "@nbouvier/hardhat-configs-proxy",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Contract addresses managment for Hardhat project",
   "main": "./dist/index.js",
   "files": [
@@ -35,7 +35,7 @@
     "typescript": "^4.8.4"
   },
   "dependencies": {
-    "@nbouvier/hardhat-configs": "^0.0.7"
+    "@nbouvier/hardhat-configs": "^0.0.8"
   },
   "peerDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.2.0",
