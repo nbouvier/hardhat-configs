@@ -1,6 +1,7 @@
 import type { HardhatRuntimeEnvironment } from 'hardhat/types';
 
 import fs from 'fs';
+import path from 'path';
 
 export interface Config { [ contractName: string ]: ConfigLine };
 export interface ConfigLine { artifact: string, address: string };
@@ -86,6 +87,12 @@ export async function addToConfig(name: string, address: string, artifactName?: 
 export async function saveConfig(config: Config, network?: string) {
     // Get the network's config file
     const configFile = await getConfigFile(network);
+
+    // Create the config folder if it does not exist yet
+    const folder = path.dirname(configFile);
+    if (!fs.existsSync(folder)) {
+        fs.mkdirSync(folder);
+    }
 
     // Write the new config
     const parsedConfig: string = JSON.stringify(config, null, 4);
