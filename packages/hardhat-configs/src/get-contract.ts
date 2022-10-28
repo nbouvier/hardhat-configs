@@ -2,8 +2,7 @@ import type { HardhatRuntimeEnvironment } from 'hardhat/types';
 import type { Contract } from 'ethers';
 import type { ConfigLine } from './utils/config';
 
-import { getConfigFile } from './utils/config';
-import { getContractConfigLine, getContractFromArtifact } from './utils/contract';
+import { getConfigFile, getContractConfigLine } from './utils/config';
 
 export class ConfigEntryNotFoundException extends Error {
     constructor(contract: string, configFile: string) {
@@ -19,16 +18,25 @@ export interface GetContractFunction {
 }
 
 export function makeGetContract(hre: HardhatRuntimeEnvironment): GetContractFunction {
-    // Returns the instance of the <name> contract in the config file or
-    //         the <name> instance of the <artifactName> contract loaded from address <address>
-    // @arg name         the name of the contract in the config file
-    // @arg address      the address of the contract (optional)
-    // @arg artifactName the name of the contract artifact (optional)
+    /**
+     * Returns the instance of the <name> contract in the config file or
+     *         the <name> instance of the <artifactName> contract loaded from address <address>
+     * @param {string} name           - the name of the contract in the config file
+     * @param {string} [address]      - the address of the contract (optional)
+     * @param {string} [artifactName] - the name of the contract artifact (optional)
+     * @returns {Promise<Contract>} a promise resolving to the found contract
+     *
+     *                    getContract(name: string)
+     *                    getContract(name: string, address: string)
+     */
     return async function getContract(name: string, address?: string, artifactName?: string): Promise<Contract> {
+        // Get the used network
+        const network = await hre.configs.getNetwork();
+        
         // Load the config line if needed
         let configLine: ConfigLine | null = null;
         if (!artifactName || !address) {
-            configLine = await getContractConfigLine(name);
+            configLine = await getContractConfigLine(name, network);
         }
 
         // Evaluate the contract data
@@ -39,7 +47,7 @@ export function makeGetContract(hre: HardhatRuntimeEnvironment): GetContractFunc
         }
 
         // Load the contract
-        const contract: Contract = await getContractFromArtifact(artifactFile, contractAddress, hre.ethers.provider);
+        const contract: Contract = await hre.ethers.getContractAt(artifactFile, contractAddress);
 
         // Returns the contract
         return contract;
