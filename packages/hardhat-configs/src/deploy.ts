@@ -64,8 +64,8 @@ export function makeDeploy(hre: HardhatRuntimeEnvironment): DeployFunction {
         // Update the config
         addToConfig(name, contract.address, contractArtifact, network);
 
-        console.log(`Deployed ${name} to ${contract.address}.`);
         // Returns the new contract
+        console.log(`Deployed ${name} to ${contract.address}.`);
         return contract;
     };
 }

@@ -14,5 +14,8 @@
   "license": "GPL-3.0",
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "@openzeppelin/contracts-upgradeable": "^4.7.3"
+  }
 }
