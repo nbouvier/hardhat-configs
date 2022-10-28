@@ -2,7 +2,7 @@ import type { HardhatRuntimeEnvironment } from 'hardhat/types';
 import type { ContractFactory, Contract } from 'ethers';
 import type { ConfigLine } from '@nbouvier/hardhat-configs';
 
-import { addToConfig, getNetwork, getContractConfigLine } from '@nbouvier/hardhat-configs';
+import { addToConfig, getContractConfigLine } from '@nbouvier/hardhat-configs';
 
 export class ProxyDeploymentException extends Error {
     constructor(name: string, error: any) {
