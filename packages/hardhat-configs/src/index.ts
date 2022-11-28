@@ -8,6 +8,7 @@ import type { GetContractFunction } from './get-contract';
 import { subtask, extendEnvironment, extendConfig } from 'hardhat/config';
 import { lazyObject } from 'hardhat/plugins';
 
+import './type-extensions';
 export { NetworkNotFoundException, makeGetNetwork } from './get-network';
 export { DeploymentException, makeDeploy } from './deploy';
 export { ConfigEntryNotFoundException, makeGetContract } from './get-contract';
