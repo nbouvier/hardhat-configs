@@ -8,6 +8,7 @@ import type { UpgradeProxyFunction } from './upgrade-proxy';
 import { subtask, extendEnvironment, extendConfig } from 'hardhat/config';
 import { lazyObject } from 'hardhat/plugins';
 
+import './type-extensions';
 export { ProxyDeploymentException } from './deploy-proxy';
 export { ProxyUpgradeException } from './upgrade-proxy';
 
