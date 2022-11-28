@@ -1,6 +1,6 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomiclabs/hardhat-ethers";
-import "./src/index";
+import "./dist/index";
 
 import './tasks/calll-and-send';
 import './tasks/deploy';
