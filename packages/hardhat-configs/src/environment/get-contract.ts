@@ -1,8 +1,8 @@
 import type { HardhatRuntimeEnvironment } from 'hardhat/types';
 import type { Contract } from 'ethers';
-import type { ConfigLine } from './utils/config';
+import type { ConfigLine } from '../utils/config';
 
-import { getConfigFile, getContractConfigLine } from './utils/config';
+import { getConfigFile, getContractConfigLine } from '../utils/config';
 
 export class ConfigEntryNotFoundException extends Error {
     constructor(contract: string, configFile: string) {

@@ -1,7 +1,7 @@
 import type { HardhatRuntimeEnvironment } from 'hardhat/types';
 import type { Contract } from 'ethers';
 
-import { sleep } from './utils/sleep';
+import { sleep } from '../utils/sleep';
 
 export class NetworkNotFoundException extends Error {
     constructor() {

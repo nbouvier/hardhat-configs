@@ -7,5 +7,5 @@ import { task } from 'hardhat/config';
 task('get-network', 'Get the network')
     .setAction(async (_, { configs }) => {
         const network: string = await configs.getNetwork();
-    console.log(network);
+        console.log(network);
     });

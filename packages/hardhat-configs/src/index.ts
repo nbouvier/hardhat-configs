@@ -1,17 +1,17 @@
 import '@nomiclabs/hardhat-ethers';
 
 import type { HardhatRuntimeEnvironment } from 'hardhat/types';
-import type { GetNetworkFunction } from './get-network';
-import type { DeployFunction } from './deploy';
-import type { GetContractFunction } from './get-contract';
+import type { GetNetworkFunction } from './environment/get-network';
+import type { DeployFunction } from './environment/deploy';
+import type { GetContractFunction } from './environment/get-contract';
 
-import { subtask, extendEnvironment, extendConfig } from 'hardhat/config';
+import { extendEnvironment } from 'hardhat/config';
 import { lazyObject } from 'hardhat/plugins';
 
-import './type-extensions';
-export { NetworkNotFoundException, makeGetNetwork } from './get-network';
-export { DeploymentException, makeDeploy } from './deploy';
-export { ConfigEntryNotFoundException, makeGetContract } from './get-contract';
+import './environment/type-extensions';
+export { NetworkNotFoundException, makeGetNetwork } from './environment/get-network';
+export { DeploymentException, makeDeploy } from './environment/deploy';
+export { ConfigEntryNotFoundException, makeGetContract } from './environment/get-contract';
 export { Config, ConfigLine, getConfigFile, loadConfig, addToConfig, saveConfig, getContractConfigLine } from './utils/config';
 
 export interface HardhatConfigs {
@@ -20,11 +20,13 @@ export interface HardhatConfigs {
     getContract: GetContractFunction
 }
 
+import './tasks/verify';
+
 extendEnvironment((hre: HardhatRuntimeEnvironment) => {
     hre.configs = lazyObject((): HardhatConfigs => {
-        const { makeGetNetwork } = require('./get-network');
-        const { makeDeploy } = require('./deploy');
-        const { makeGetContract } = require('./get-contract');
+        const { makeGetNetwork } = require('./environment/get-network');
+        const { makeDeploy } = require('./environment/deploy');
+        const { makeGetContract } = require('./environment/get-contract');
 
         return {
             getNetwork: makeGetNetwork(hre),

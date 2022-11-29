@@ -1,8 +1,8 @@
 import type { HardhatRuntimeEnvironment } from 'hardhat/types';
 import type { ContractFactory, Contract } from 'ethers';
-import type { ConfigLine } from './utils/config';
+import type { ConfigLine } from '../utils/config';
 
-import { addToConfig, getContractConfigLine } from './utils/config';
+import { addToConfig, getContractConfigLine } from '../utils/config';
 
 export class DeploymentException extends Error {
     constructor(name: string, error: any) {
