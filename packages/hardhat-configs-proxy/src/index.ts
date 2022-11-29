@@ -2,15 +2,15 @@ import '@openzeppelin/hardhat-upgrades';
 
 import type { HardhatRuntimeEnvironment } from 'hardhat/types';
 import type { HardhatConfigs } from '@nbouvier/hardhat-configs';
-import type { DeployProxyFunction } from './deploy-proxy';
-import type { UpgradeProxyFunction } from './upgrade-proxy';
+import type { DeployProxyFunction } from './environment/deploy-proxy';
+import type { UpgradeProxyFunction } from './environment/upgrade-proxy';
 
 import { subtask, extendEnvironment, extendConfig } from 'hardhat/config';
 import { lazyObject } from 'hardhat/plugins';
 
-import './type-extensions';
-export { ProxyDeploymentException } from './deploy-proxy';
-export { ProxyUpgradeException } from './upgrade-proxy';
+import './environment/type-extensions';
+export { ProxyDeploymentException } from './environment/deploy-proxy';
+export { ProxyUpgradeException } from './environment/upgrade-proxy';
 
 export interface HardhatConfigsProxy extends HardhatConfigs {
     deployProxy: DeployProxyFunction,
@@ -20,8 +20,8 @@ export interface HardhatConfigsProxy extends HardhatConfigs {
 extendEnvironment((hre: HardhatRuntimeEnvironment) => {
     hre.configs = lazyObject((): HardhatConfigsProxy => {
         const { makeGetNetwork, makeDeploy, makeGetContract } = require('@nbouvier/hardhat-configs');
-        const { makeDeployProxy } = require('./deploy-proxy');
-        const { makeUpgradeProxy } = require('./upgrade-proxy');
+        const { makeDeployProxy } = require('./environment/deploy-proxy');
+        const { makeUpgradeProxy } = require('./environment/upgrade-proxy');
 
         return {
             getNetwork: makeGetNetwork(hre),
