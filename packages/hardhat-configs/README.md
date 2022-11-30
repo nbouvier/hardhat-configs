@@ -1,7 +1,6 @@
 # Hardhat Configs
 
-**Hardhat Configs** provides an easy way to keep track of your deployed contracts address on your favourite blockchain.  
-Works also with the `@openzeppelin/hardhat-upgrades` plugin.
+**Hardhat Configs** provides an easy way to keep track of your deployed contracts address on your favorite blockchain.
 
 ## Getting started
 
@@ -30,7 +29,7 @@ require('@nbouvier/hardhat-configs');
 // Typescript
 import '@nbouvier/hardhat-configs';
 ```
-> **NB:** The import should come after both `@nomiclabs/hardhat-etherscan` and `@openzeppelin/hardhat-upgrades`.
+> **NB:** The import should come after `@nomiclabs/hardhat-etherscan`.
 
 3. Start to write some code !
 
