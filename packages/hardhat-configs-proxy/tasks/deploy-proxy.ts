@@ -8,7 +8,7 @@ import { task } from 'hardhat/config';
 
 task('deploy-proxy', 'Deploy a contract behind a proxy')
     .setAction(async (_, { configs }) => {
-        const contract: Contract = await configs.deployProxy('Value', [ 20 ]);
+        const contract: Contract = await (await configs.deployProxy('Value', [ 20 ])).wait();
         console.log(contract.address);
         const alreadyDeployedContract: Contract = await configs.deployProxy('Value', [ 20 ]);
         console.log(alreadyDeployedContract.address);
