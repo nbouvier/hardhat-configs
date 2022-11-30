@@ -8,8 +8,8 @@ import { task } from 'hardhat/config';
 
 task('deploy', 'Deploy a contract')
     .setAction(async (_, { configs }) => {
-        const contract: Contract = await configs.deploy('Value', [ 20 ]);
+        const contract: Contract = await (await configs.deploy('Value2', [ 20 ], 'Value')).wait();
         console.log(contract.address);
-        const alreadyDeployedContract: Contract = await configs.deploy('Value', [ 20 ]);
+        const alreadyDeployedContract: Contract = await configs.deploy('Value2', [ 20 ], 'Value');
         console.log(alreadyDeployedContract.address);
     });

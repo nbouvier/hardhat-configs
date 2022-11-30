@@ -11,14 +11,12 @@ import { tryRequire } from '../utils/try-require';
      */
 
      subtask('verify:verify')
-        .setAction(async ({ address }, { run, configs }, runSuper: RunSuperFunction<any>) => {
-            const contract = await configs.getContract(address);
+        .setAction(async (args: any, { configs }, runSuper: RunSuperFunction<any>) => {
+            const contract = await configs.getContract(args.address);
             
-            await run('verify:verify', {
-                address: contract.address
-            });
+            await runSuper({ ...args, address: contract.address });
 
-            console.log(`Verified ${address}`);
+            console.log(`Verified ${args.address}`);
         });
 
 }

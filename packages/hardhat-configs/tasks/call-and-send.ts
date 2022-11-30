@@ -11,7 +11,7 @@ task('call-and-send', 'Make a function call and a transaction')
         const contract: Contract = await configs.deploy('Value', [ 20 ]);
         const value: number = await contract.value();
         console.log(value);
-        await contract.updateValue(10);
+        await (await contract.updateValue(10)).wait();
         const newValue: number = await contract.value();
         console.log(newValue);
     });
